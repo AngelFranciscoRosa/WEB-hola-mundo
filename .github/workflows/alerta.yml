@@ -1,0 +1,22 @@
+name: CI Alerta Ntfy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Ejecutar programa Hola Mundo
+        run: node index.js
+
+      - name: Enviar notificación a ntfy.sh
+        run: |
+          curl -H "Title: Despliegue Exitoso 🚀" \
+               -H "Priority: urgent" \
+               -d "Se ha subido nuevo código a la rama main en el repositorio WEB-hola-mundo de ITLA." \
+               ntfy.sh/devops-itla
